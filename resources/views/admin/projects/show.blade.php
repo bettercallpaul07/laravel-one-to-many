@@ -21,13 +21,11 @@
             </h6>
 
             <h3>
-
-                ciclo if che non mostra la categoria se non è presente
-
+                Categoria:
                 @if ($project->category)
                     {{ $project->category->name }}
                 @else
-                    "Nessuna categoria"
+                    Nessuna categoria
                 @endif
 
             </h3>

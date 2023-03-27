@@ -86,8 +86,11 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project)
+
     {
-        return view("admin.projects.edit", compact("project"));
+        $categories = Category::all();
+
+        return view("admin.projects.edit", compact("project", "categories"));
     }
 
     /**
@@ -106,6 +109,7 @@ class ProjectController extends Controller
         $data["slug"] = Str::slug($data["title"]);
 
         $project->update($data);
+
 
 
         return redirect()->route("admin.projects.show", $project->id)->with("success", "Post aggiornato con successo!");

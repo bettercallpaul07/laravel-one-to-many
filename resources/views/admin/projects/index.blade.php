@@ -22,6 +22,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Nome Progetto</th>
                     <th scope="col">Slug</th>
+                    <th scope="col">Categoria</th>
                     <th scope="col">Azioni</th>
                   </tr>
                 </thead>
@@ -31,6 +32,12 @@
                     <th scope="row">{{ $project->id }}</th>
                     <td>{{ $project->title }}</td>
                     <td>{{ $project->slug }}</td>
+                    <td>
+                        @if ($project->category)
+                            {{ $project->category->name }}
+                        @else
+                            Nessuna categoria
+                        @endif
                     <td>
                         <a href="{{ route("admin.projects.show", $project->id) }}" class="btn btn-primary">
                             Dettagli

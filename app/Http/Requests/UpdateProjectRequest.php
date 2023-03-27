@@ -32,7 +32,8 @@ class UpdateProjectRequest extends FormRequest
                 Rule::unique("projects")->ignore($this->project->id),
                 "max:128"
             ],
-            "content" => "required|max:4096"
+            "content" => "required|max:4096",
+            "category_id" => "nullable|exists:categories,id"
         ];
     }
 }
