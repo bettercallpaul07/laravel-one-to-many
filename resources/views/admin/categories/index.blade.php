@@ -4,12 +4,11 @@
 <div class="container-fluid mt-4">
     <div class="row justify-content-center">
         <div>
-            <h1>Tutti i miei progetti</h1>
+            <h1>Tutte le categorie</h1>
         </div>
 
-        <a href="{{ route("admin.projects.create")}}" class="btn btn-success">
-            Aggiungi Progetto
-
+        <a href="{{ route("admin.categories.create")}}" class="btn btn-success">
+            Aggiungi Categoria
         </a>
     </div>
 
@@ -20,35 +19,34 @@
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Nome Progetto</th>
+                    <th scope="col">Nome</th>
                     <th scope="col">Slug</th>
-                    <th scope="col">Categoria</th>
+                    <th scope="col"># Progetti</th>
                     <th scope="col">Azioni</th>
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($projects as $project)
+                    @foreach ($categories as $category)
                   <tr>
-                    <th scope="row">{{ $project->id }}</th>
-                    <td>{{ $project->title }}</td>
-                    <td>{{ $project->slug }}</td>
+                    <th scope="row">{{ $category->id }}</th>
+                    <td>{{ $category->name }}</td>
+                    <td>{{ $category->slug }}</td>
                     <td>
-                        @if ($project->category)
-                        <a href="{{ route("admin.categories.show", $project->category->id) }}">
-                            {{ $project->category->name }}
-                        </a>
+                        @if ($category->projects->count() > 0)
+                            {{ $category->projects->count() }}
                         @else
-                            Nessuna categoria
+                            Nessun progetto
                         @endif
+                    </td>
                     <td>
-                        <a href="{{ route("admin.projects.show", $project->id) }}" class="btn btn-primary">
+                        <a href="{{ route("admin.categories.show", $category->id) }}" class="btn btn-primary">
                             Dettagli
                         </a>
-                        <a href="{{ route("admin.projects.edit", $project->id) }}" class="btn btn-warning">
+                        <a href="{{ route("admin.categories.edit", $category->id) }}" class="btn btn-warning">
                             Aggiorna
                         </a>
                         <form
-                        action="{{ route("admin.projects.destroy", $project->id) }}"
+                        action="{{ route("admin.categories.destroy", $category->id) }}"
                         class="d-inline-block"
                         method="POST"
                         onsubmit="return confirm('Sei sicuro di volerlo eliminare?');">
@@ -69,3 +67,4 @@
     </div>
 </div>
 @endsection
+

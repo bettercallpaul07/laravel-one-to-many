@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 
 //Models
 use App\Models\Category;
+use App\Models\Project;
+
 
 
 //Helpers
@@ -46,6 +47,10 @@ class ProjectController extends Controller
      * @param  \App\Http\Requests\StoreProjectRequest  $request
      * @return \Illuminate\Http\Response
      */
+
+
+
+
     public function store(StoreProjectRequest $request)
     {
         //qui prendiamo gli input validati
@@ -58,6 +63,7 @@ class ProjectController extends Controller
             "title" => $data["title"],
             "slug" => $slug,
             "content" => $data["content"],
+            "category_id" => $data["category_id"],
         ]);
 
         //oppure
@@ -88,7 +94,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
 
     {
+
         $categories = Category::all();
+
 
         return view("admin.projects.edit", compact("project", "categories"));
     }
@@ -111,8 +119,7 @@ class ProjectController extends Controller
         $project->update($data);
 
 
-
-        return redirect()->route("admin.projects.show", $project->id)->with("success", "Post aggiornato con successo!");
+        return redirect()->route("admin.projects.show", $project->id)->with("success", "Progetto modificato con successo!");
     }
 
 

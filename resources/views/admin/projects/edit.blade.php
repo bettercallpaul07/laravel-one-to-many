@@ -12,9 +12,12 @@
     </div>
     <div class="row mb-4">
         <div class="col">
-            <form action="{{ route("admin.projects.update"), $project->id }}" method="POST">
+            <form action="{{ route("admin.projects.update", $project->id) }}" method="POST">
+                
                 @csrf
+
                 @method("PUT")
+
                 <div class="mb-3">
                     <label for="title" class="form-label">Titolo</label>
                     <input
@@ -22,7 +25,7 @@
                      class="form-control"
                      id="title"
                      name="title"
-                     value="{{ old("title", $post->title) }}"
+                     value="{{ old("title", $project->title) }}"
                      placeholder="Inserisci il titolo..."
                      required
                      maxlength="128">
@@ -37,19 +40,19 @@
                         name="content"
                         placeholder="Inserisci il contenuto..."
                         required
-                        maxlength="4096">{{ old("content", $post->content) }}</textarea>
+                        maxlength="4096">{{ old("content", $project->content) }}</textarea>
                 </div>
 
                 <div class="mb-3">
-                    <label for="category">Categoria</label>
+                    
+                    <label for="category_id" class="form-label">
+                        Categoria
+                    </label>
+
                     <select name="category_id" id="category_id" class="form-select">
                     <option value="">Nessuna categoria</option>
                     @foreach ($categories as $category)
-                    <option
-                            value="{{ $category->id }}"
-                            {{ old("category_id", $post->category_id) == $category->id ? "selected" : "" }}
-                            >{{ $category->name }}
-                    </option>
+                        <option value="{{ $category->id }}" {{ old("category_id", $project->category_id) == $category->id ? "selected" : "" }}>{{ $category->name }}</option>
                     @endforeach
                     </select>
 
@@ -62,20 +65,16 @@
                     </button>
                 </div>
                      
-                     
-                     
-                    
-
-
-
-                </div>
-            
-            
-            
             </form>
 
         </div>
+            
+            
+            
 
     </div>
+
 </div>
 @endsection
+
+Missing required parameter for [Route: admin.projects.update] [URI: admin/projects/{project}] [Missing parameter: project].

@@ -23,8 +23,12 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        {
+            return [
+                "title" => ["required", "max:255", "unique:posts,title,{$this->post->id}"],
+                "content" => "required|max:4096",
+                "category_id" => "nullable|exists:categories,id"
+            ];
+        }
     }
 }

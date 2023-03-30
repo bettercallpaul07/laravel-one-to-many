@@ -43,7 +43,8 @@
                 <div class="mb-3">
                     <label for="category">Categoria</label>
                     <select name="category_id" id="category_id" class="form-select">
-                    @foreach ($categories as $category)
+                    <option value="">Nessuna categoria</option>
+                        @foreach ($categories as $category)
                     <option
                             value="{{ $category->id }}"
                             {{ old("category_id") == $category->id ? "selected" : "" }}
